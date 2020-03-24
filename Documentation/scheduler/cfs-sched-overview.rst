@@ -12,4 +12,6 @@ This documentation describes the linux CFS scheduler.
 .. toctree::
    :maxdepth: 2
 
+   cfs-overview
+   cfs-data-structs
    sched-design-CFS

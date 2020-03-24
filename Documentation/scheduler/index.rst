@@ -21,6 +21,7 @@ specific implementation differences.
     sched-features
     arch-specific.rst
     sched-debugging.rst
+    scheduler-api.rst
 
 .. only::  subproject and html
 
