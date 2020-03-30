@@ -18,6 +18,7 @@ specific implementation differences.
 
     overview
     cfs-sched-overview
+    context-switching
     sched-features
     arch-specific.rst
     sched-debugging.rst
