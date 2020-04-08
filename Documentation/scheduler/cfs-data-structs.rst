@@ -6,7 +6,7 @@ CFS Data Structures
 
 Main parts of the Linux scheduler are:
 
-**Running Queue:** This is the central data structure of process
+**Runqueue:** This is the central data structure of process
 scheduling. It manages tasks that are in a runnable state waiting for
 a processor. Each CPU has its own run queue. The scheduler picks a task
 from the queue and assigns it to the CPU core. The main members of the
@@ -212,6 +212,7 @@ does the following:
     task must drop that reference.
 
 Kernel forwards the tasks to each class based on the scheduling policy
-assigned to each task. Tasks assigned with SCHED_NORMAL, SCHED_IDLE and
-SCHED_BATCH go to fair_sched_class and tasks assigned with SCHED_RR and
-SCHED_FIFO go to rt_sched_class
+assigned to each task. Tasks assigned with SCHED_NORMAL, SCHED_IDLE
+and SCHED_BATCH go to fair_sched_class and tasks assigned with SCHED_RR
+and SCHED_FIFO go to rt_sched_class. Tasks assigned with SCHED_DEADLINE
+policy goes to dl_sched_class.

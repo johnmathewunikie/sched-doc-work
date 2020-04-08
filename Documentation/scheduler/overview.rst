@@ -94,7 +94,7 @@ struct are:
 
 | *sched_entity:*  Pointer to sched_entity CFS structure.
 
-| *poicy:*  Value for scheduling policy.  The possible values are:
+| *policy:*  Value for scheduling policy.  The possible values are:
 
 * SCHED_NORMAL:  Regular tasks use this policy.
 
