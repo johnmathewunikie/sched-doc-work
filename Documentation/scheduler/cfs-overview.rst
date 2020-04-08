@@ -31,20 +31,12 @@ processes.  CFS adopts this concept of fairness.  CFS takes in to use the
 length of the sleep time in the interactive process so processes which
 sleep less will get more CPU time.
 
-CFS uses a time ordered red-black tree for each CPU.  The red-black tree
-is a type of self-balancing binary search tree.  Every running process,
-has a node in the red-black tree. The process at the left-most position
-of the red-black tree is the one to be scheduled next.  The red-black tree
-is complex, but it has a good worst-case running time for its operations
-and is efficient in practice: it can search, insert, and delete in
-O(log n) time, where n is the number of elements in the tree. The leaf
-nodes are not relevant and do not contain data. The red-black tree is
-always balanced.  Because the red-black tree is a binary tree, the time
-complexities of lookup operations are logarithmic.  However, non-left-most
-lookup is hardly ever done and the left-most node pointer is always
-cached.  A red-black tree can be implemented with internal storage—that
-is, no external allocations are needed to maintain the data structure.
+CFS uses a time ordered red-black tree for each CPU. A brief overview
+and usage of red-black tree is provided in the following documentation ::
 
-The implementation of the rb tree is at ::
+    Documentation/rbtree.txt
 
-    include/linux/rbtree.h
+Every running process, has a node in the red-black tree. The process at
+the left-most position of the red-black tree is the one to be scheduled
+next.  The non-left-most lookup is hardly ever done and the left-most
+node pointer is always cached.
