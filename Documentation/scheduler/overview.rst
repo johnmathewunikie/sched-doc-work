@@ -260,11 +260,13 @@ The tracepoints are defined in ::
 
   include/trace/events/sched.h
 
-Using these treacepoints it is possible to model the scheduler state
-transition in an automata model.  The following conference paper discusses
-such modeling.
+Using these treacepoints it is possible to model the scheduler state transition
+in an automata model. The following journal paper discusses such modeling:
 
-https://www.researchgate.net/publication/332440267_Modeling_the_Behavior_of_Threads_in_the_PREEMPT_RT_Linux_Kernel_Using_Automata
+Daniel B. de Oliveira, Rômulo S. de Oliveira, Tommaso Cucinotta, **A thread
+synchronization model for the PREEMPT_RT Linux kernel**, *Journal of Systems
+Architecture*, Volume 107, 2020, 101729, ISSN 1383-7621,
+https://doi.org/10.1016/j.sysarc.2020.101729.
 
 To model the scheduler efficiently the system was divided in to generators
 and specifications. Some of the generators used were "need_resched",
