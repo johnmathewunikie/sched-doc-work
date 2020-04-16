@@ -11,7 +11,6 @@ Scheduler related functions
 .. kernel-doc:: kernel/sched/core.c
 	:functions: scheduler_tick
 
-
 .. kernel-doc:: kernel/sched/core.c
 	:functions: try_to_wake_up
 
