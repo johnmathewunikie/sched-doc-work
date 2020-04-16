@@ -14,8 +14,9 @@ been selected to run.
 
  The execution flow is as follows:
 
-* Calls prepare_task_switch() to prepare both previous and new task by
-  storing or changing some values in their task_struct.
+* Calls prepare_task_switch() to set up locking and calls architecture
+ specific hooks.It must be paired with a subsequent finish_task_switch
+ after the context switch.
 
 
 * Calls macro :c:macro:`arch_start_context_switch()`
@@ -71,7 +72,11 @@ space of the kernel task is set to NULL.
   registers and any other architecture-specific state that must be
   managed and restored on a per-process basis.
 
-* Calls finish_task_switch() must be called after the context switch,
-  paired with a prepare_task_switch() call before the context switch.It
-  will reconcile locking set up by prepare_task_switch, and do any other
-  architecture-specific cleanup actions.
+* Calls finish_task_switch() to release the spin lock of the runqueue and 
+ enables the local interrupts. Then, it checks whether prev is a zombie 
+ task that is being removed from the system,if so, it invokes 
+ put_task_struct() to free the process descriptor reference counter and 
+ drop all remaining references to the process. It also reconcile locking 
+ set up by prepare_task_switch, and do any other architecture-specific 
+ cleanup actions.
+

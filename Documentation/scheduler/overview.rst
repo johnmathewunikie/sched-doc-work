@@ -163,10 +163,10 @@ Following are some places that notify the kernel to schedule:
   until the condition evaluates to true.  The condition is checked each
   time the wait-queue wq is woken up.
 
-* _cond_resched() : It gives the scheduler a chance to run a
+* cond_resched() : It gives the scheduler a chance to run a
   higher-priority process.
 
-* __cond_resched_lock() :  If a reschedule is pending, drop the given
+* cond_resched_lock() :  If a reschedule is pending, drop the given
   lock, call schedule, and on return reacquire the lock.
 
 * do_task_dead() : Changes the the task state to TASK_DEAD and calls
