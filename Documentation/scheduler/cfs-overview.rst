@@ -8,7 +8,7 @@ History
 -------
 
 Linux 2.6.23 introduced a modular scheduler core and a Completely
-Fair Scheduler (CFS) implemented as a scheduling module. Scheduler
+Fair Scheduler (CFS) implemented as a scheduling module. Linux
 has been improving since kernel version 2.4. In kernel 2.4  there was
 one running queue for all processes.  During every schedule the queue
 was locked and every task time-slice was update.  This implementation

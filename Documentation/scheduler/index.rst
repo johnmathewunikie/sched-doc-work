@@ -17,7 +17,9 @@ specific implementation differences.
     :maxdepth: 2
 
     overview
-    cfs-sched-overview
+    sched-data-structs
+    cfs-overview
+    sched-design-CFS
     context-switching
     sched-features
     arch-specific.rst
