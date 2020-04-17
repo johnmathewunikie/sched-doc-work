@@ -12,7 +12,7 @@ The MIPS architecture defines four coprocessors.
 - CP1: reserved for the floating point coprocessor, the FPU
 - CP2: available for specific implementations.
 - CP3: reserved for floating point operations in the release 1
-       implementation of MIPS64.
+  implementation of MIPS64.
 
 MIPS32 and MIPS64 architectures provide support for optional components
 known as Modules or Application Specific Extensions.  The MT module

@@ -39,7 +39,7 @@ next_task and prev_task allow a process to obtain its next task and
 its previous task respectively.  The frequently used fields of the task
 struct are:
 
-*state:*  The running state of the task.  The possible states are:
+| *state:*  The running state of the task.  The possible states are:
 
 - TASK_RUNNING:  The task is currently running or in a run queue waiting
   to run.
@@ -66,35 +66,35 @@ struct are:
   a signal or any other wake event cannot wake it up and insert it on
   the runqueue.
 
-*exit_state* : The exiting state of the task.  The possible states are:
+| *exit_state* : The exiting state of the task.  The possible states are:
 
 - EXIT_ZOMBIE:  The task is terminated and waiting for parent to collect
   the exit information of the task.
 - EXIT_DEAD:  After collecting the exit information the task is put to
   this state and removed from the system.
 
-*static_prio:*  Nice value of a task.  The value of this field does
- not change.  Value ranges from -20 to 19.  This value is mapped to nice value
- and used in the scheduler.
+| *static_prio:*  Nice value of a task.  The value of this field does
+   not change.  Value ranges from -20 to 19.  This value is mapped
+   to nice value and used in the scheduler.
 
-*prio:*  Dynamic priority of a task.  Previously a function of static
- priority and tasks interactivity.  Value not used by CFS scheduler but used
- by the rt scheduler.  Might be boosted by interactivity modifiers.  Changes
- upon fork, setprio syscalls, and whenever the interactivity estimator
- recalculates.
+| *prio:*  Dynamic priority of a task.  Previously a function of static
+   priority and tasks interactivity.  Value not used by CFS scheduler but used
+   by the rt scheduler.  Might be boosted by interactivity modifiers.  Changes
+   upon fork, setprio syscalls, and whenever the interactivity estimator
+   recalculates.
 
-*normal_prio:*  Expected priority of a task.  The value of static_prio
- and normal_prio are the same for non real time processes.  For real time
- processes value of prio is used.
+| *normal_prio:* Expected priority of a task.  The value of static_prio
+   and normal_prio are the same for non real time processes.  For real time
+   processes value of prio is used.
 
-*rt_priority:*  Field used by real time tasks. Real time tasks are
- prioritized based on this value.
+| *rt_priority:* Field used by real time tasks. Real time tasks are
+   prioritized based on this value.
 
-*sched_class:*  Pointer to sched_class CFS structure.
+| *sched_class:*  Pointer to sched_class CFS structure.
 
-*sched_entity:*  Pointer to sched_entity CFS structure.
+| *sched_entity:*  Pointer to sched_entity CFS structure.
 
-*poicy:*  Value for scheduling policy.  The possible values are:
+| *poicy:*  Value for scheduling policy.  The possible values are:
 
 * SCHED_NORMAL:  Regular tasks use this policy.
 
@@ -106,8 +106,8 @@ struct are:
 * SCHED_FIFO & SCHED_RR:  These policies for real time tasks.  Handled
   by real time scheduler.
 
-*nr_cpus_allowed:*  Bit field containing tasks affinity towards a set of
- cpu cores.  Set using sched_setaffinity() system call.
+| *nr_cpus_allowed:*  Bit field containing tasks affinity towards a set of
+   cpu cores.  Set using sched_setaffinity() system call.
 
 
 Thread
