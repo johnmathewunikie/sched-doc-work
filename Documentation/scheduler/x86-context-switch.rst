@@ -10,20 +10,17 @@ is made.  For x86 arch it is located at ::
 
     arch/x86/include/asm/switch_to.h
 
-Since 4.9, switch_to() has been split into two parts: a
-`prepare_switch_to()` macro and the inline assembly portion of
-has been moved to an actual assembly file ::
+Since kernel 4.9, switch_to() has been split into two parts: a
+`prepare_switch_to()` macro and the inline assembly implementation of
+__switch_to_asm() in the assembly file ::
 
     arch/x86/entry/entry_64.S
-
-* There is still a C portion of the switch which occurs via a jump in
-  the middle of the assembly code.  The source is located in
-  `arch/x86/kernel/process_64.c` since 2.6.24
+    arch/x86/entry/entry_32.S
 
 The main function of the prepare_switch_to() is to handle the case
 when stack uses virtual memory.  This is configured at build time and
 is mostly enable in most modern distributions.  This function accesses
-the stack pointer to prevent a double fault.Switching to a stack that
+the stack pointer to prevent a double fault. Switching to a stack that
 has top-level paging entry that is not present in the current MM will
 result in a page fault which will be promoted to double fault and the
 result is a panic. So it is necessary to probe the stack now so that
@@ -40,9 +37,13 @@ The main steps of the inline assembly function __switch_to_asm() are:
   affecting the host kernel
 * restore all registers from the new stack previously pushed in reverse
   order
+* jump to a C implementation of __switch_to(). The sources are located in::
 
-The main steps of the c function __switch_to() which the assembly
-code jumps to is as follows:
+      arch/x86/kernel/process_64.c
+      arch/x86/kernel/process_32.c
+
+
+The main steps of the c function __switch_to() are as follows:
 
 * retrieve the thread :c:type:`struct thread_struct <thread_struct>`
   and fpu :c:type:`struct fpu <fpu>` structs from the next and previous
