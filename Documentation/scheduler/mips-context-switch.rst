@@ -80,6 +80,9 @@ implementation of the macro are:
   registers are restored from the next task.
 * Finally the mips processor specific implementation of the resume()
   function is called.  It restores the registers of the next task including
-  the stack pointer.  The implementation is in assembly::
+  the stack pointer.  The implementation is in assembly in the following
+  architecutre specific files ::
 
     arch/mips/kernel/r4k_switch.S
+    arch/mips/kernel/r2300_switch.S
+    arch/mips/kernel/octeon_switch.S
