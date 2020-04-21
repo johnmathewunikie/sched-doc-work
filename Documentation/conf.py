@@ -38,7 +38,9 @@ needs_sphinx = '1.3'
 # ones.
 extensions = ['kerneldoc', 'rstFlatTable', 'kernel_include', 'cdomain',
               'kfigure', 'sphinx.ext.ifconfig', 'automarkup',
-              'maintainers_include', 'sphinx.ext.autosectionlabel' ]
+              'maintainers_include', 'sphinx.ext.autosectionlabel',
+            #   'sphinxcontrib.aafig']
+              'sphinxcontrib.ditaa']
 
 # Ensure that autosectionlabel will produce unique names
 autosectionlabel_prefix_document = True
@@ -569,6 +571,36 @@ epub_exclude_files = ['search.html']
 
 # If false, no index is generated.
 #epub_use_index = True
+
+
+# -- Options for Ditaa output ----------------------------------------------
+
+# Please see the Sphinx Ditaa extension descriptin here:
+# https://pypi.org/project/sphinxcontrib-ditaa/
+# "Ditaa is a java implementation and maybe is not callable directly, please
+# input the ditaa executale name if you didn’t convert it to a normal command.
+# Default is “ditaa”. See examples below."
+# "One possilbe convertation might be like this:
+# | $ cat /usr/local/bin/ditaa
+# | #!/bin/bash
+# | exec java  -jar /usr/local/Cellar/ditaa/0.10/libexec/ditaa0_10.jar "$@" "
+# Other way to put the path to the java exec here:
+ditaa = "java"
+# Note: The origin of the path mentioned at sphinxcontrib-ditaa page is
+# unclear. At the time of writing, the ditaa.sourceforge.net keeps link to
+# ver.9 of this java file that can be placed anywere, e.g.:
+ditaa_args = ["-jar", "/home/some-user/Downloads/Ditaa/ditaa0_9.jar"]
+
+# This is for generating svg output.
+#ditaa_args = ['--svg']
+#ditaa_output_suffix = 'svg'
+# The default values is for png: ditaa_output_suffix = 'png'
+ditaa_output_suffix = 'png'
+
+# "Since ditaa is slow, will give out a log to note progress if it’s
+# configured. Default is True."
+ditaa_log_enable = True
+
 
 #=======
 # rst2pdf
