@@ -231,29 +231,47 @@ Scheduler State Transition
 ==========================
 
 A very high level scheduler state transition flow with a few states can
-be depicted as follows.
+be depicted as follows. ::
 
-.. kernel-render:: DOT
-   :alt: DOT digraph of Scheduler state transition
-   :caption: Scheduler state transition
+                                       *
+                                       |
+                                       | task
+                                       | forks
+                                       v
+                        +------------------------------+
+                        |           TASK_NEW           |
+                        |        (Ready to run)        |
+                        +------------------------------+
+                                       |
+                                       |
+   int                                 v
+                     +------------------------------------+
+                     |            TASK_RUNNING            |
+   +---------------> |           (Ready to run)           | <--+
+   |                 +------------------------------------+    |
+   |                   |                                       |
+   |                   | schedule() calls context_switch()     | task is pre-empted
+   |                   v                                       |
+   |                 +------------------------------------+    |
+   |                 |            TASK_RUNNING            |    |
+   |                 |             (Running)              | ---+
+   | event occurred  +------------------------------------+
+   |                   |
+   |                   | task needs to wait for event
+   |                   v
+   |                 +------------------------------------+
+   |                 |         TASK_INTERRUPTIBLE         |
+   |                 |        TASK_UNINTERRUPTIBLE        |
+   +-----------------|           TASK_WAKEKILL            |
+                     +------------------------------------+
+                                       |
+                                       | task exits via do_exit()
+                                       v
+                        +------------------------------+
+                        |          TASK_DEAD           |
+                        |         EXIT_ZOMBIE          |
+                        +------------------------------+
 
-   digraph sched_transition {
-      node [shape = point,  label="exisiting task\n calls fork()"]; fork
-      node [shape = box, label="TASK_NEW\n(Ready to run)"] tsk_new;
-      node [shape = box, label="TASK_RUNNING\n(Ready to run)"] tsk_ready_run;
-      node [shape = box, label="TASK_RUNNING\n(Running)"] tsk_running;
-      node [shape = box, label="TASK_DEAD\nEXIT_ZOMBIE"] exit_zombie;
-      node [shape = box, label="TASK_INTERRUPTIBLE\nTASK_UNINTERRUPTIBLE\nTASK_WAKEKILL"] tsk_int;
-      fork -> tsk_new [ label = "task\nforks" ];
-      tsk_new -> tsk_ready_run;
-      tsk_ready_run -> tsk_running [ label = "schedule() calls context_switch()" ];
-      tsk_running -> tsk_ready_run [ label = "task is pre-empted" ];
-      subgraph int {
-         tsk_running -> tsk_int [ label = "task needs to wait for event" ];
-         tsk_int ->  tsk_ready_run [ label = "event occurred" ];
-      }
-      tsk_int ->  exit_zombie [ label = "task exits via do_exit()" ];
-   }
 
 Scheduler provides trace points tracing all major events of the scheduler.
 The tracepoints are defined in ::
